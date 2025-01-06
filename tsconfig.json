@@ -3,19 +3,18 @@
     "target": "ES6",
     "module": "commonjs",
     "outDir": "./dist",
-    "rootDir": "./src", 
+    "rootDir": "./src",
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitAny": false
   },
-  "include": [
-    "src/**/*.ts" 
-  ],
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],
   "paths": {
     "@controllers/*": ["controllers/*"],
     "@services/*": ["services/*"]
-  }
+  },
+  "types": ["node"]
 }

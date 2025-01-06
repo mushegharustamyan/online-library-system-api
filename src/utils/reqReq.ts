@@ -55,6 +55,7 @@ export const sendResBody = (
   res.status(status).json(body);
 };
 
-export const getEnv = (key: string) => {
-  return process.env[`${key}`];
+export const getEnv = (key: string): number => {
+  return Number(process.env[`${key}`]);
 };
+ 

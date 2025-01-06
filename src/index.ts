@@ -1,14 +1,10 @@
-import express from "express";
-import dotenv from "dotenv"
-import { configureApp } from "./utils/app";
+import dotenv from "dotenv";
 import { getEnv } from "./utils/reqReq";
+import app from "./utils/app";
 
-const app = express();
-dotenv.config()
+dotenv.config();
 
-configureApp(app);
-
-const port = getEnv("PORT");
+const port: number = getEnv("PORT") || 3000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
