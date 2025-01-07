@@ -1,11 +1,10 @@
 import dotenv from "dotenv";
-import { getEnv } from "./utils/reqReq";
+dotenv.config();
+import { getEnvPort } from "./utils/reqReq";
 import app from "./utils/app";
 
-dotenv.config();
+const port: number = getEnvPort() || 3000;
 
-const port: number = getEnv("PORT") || 3000;
-
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server is running on port ${port}`);
 });
