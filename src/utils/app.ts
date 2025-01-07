@@ -8,7 +8,7 @@ class App {
   constructor() {
     this.app = express();
   }
-
+ 
   public configureApp() {
     const { app } = this;
 
