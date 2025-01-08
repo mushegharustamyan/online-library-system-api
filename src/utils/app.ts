@@ -3,6 +3,7 @@ import { Application } from "express";
 import { PingPongRouter } from "../routes/ping";
 import { getEnv, getEnvPort } from "./reqReq";
 import { IConnectionSettings } from "../interfaces";
+import { dbConfig } from "../db/db.config";
 
 class App {
   private app: Application;
@@ -14,7 +15,7 @@ class App {
     this.app = express();
     this.environment = getEnv("NODE_ENV") || "prod";
     this.port = getEnvPort() || 3000;
-    this.dbSettings = this.setDBSettings();
+    this.dbSettings = this.getDBConfigs();
   }
 
   private configureRoutes(): void {
@@ -23,27 +24,8 @@ class App {
     app.use("/ping", PingPongRouter);
   }
 
-  private setDBSettings(): IConnectionSettings {
-    if (this.environment !== "test") return this.getProdDBSettings();
-    else return this.getTestDBSettings();
-  }
-
-  private getProdDBSettings(): IConnectionSettings {
-    return {
-      db: getEnv("DB_NAME"),
-      user: getEnv("DB_USER"),
-      password: getEnv("DB_PWD"),
-      host: getEnv("DB_HOST"),
-    };
-  }
-
-  private getTestDBSettings(): IConnectionSettings {
-    return {
-      db: getEnv("TEST_DB_NAME"),
-      user: getEnv("TEST_DB_USER"),
-      password: getEnv("TEST_DB_PWD"),
-      host: getEnv("TEST_DB_HOST"),
-    };
+  private getDBConfigs(): IConnectionSettings {
+    return dbConfig[this.environment];
   }
 
   public listen(port: number, f: () => void) {
