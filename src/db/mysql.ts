@@ -1,5 +1,4 @@
 import mysql from "mysql2/promise";
-import { getEnv } from "../utils/reqReq";
 import { IConnectionSettings } from "../interfaces";
 import app from "../utils/app";
 
@@ -29,6 +28,6 @@ class MySQLService {
   }
 }
 
-const mysqlService = new MySQLService(app.getAppDBSetttings());
+const mysqlService = new MySQLService(app.getAppDBSettings());
 
 export default mysqlService;

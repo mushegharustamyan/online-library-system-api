@@ -3,7 +3,7 @@ dotenv.config();
 
 import app from "./utils/app";
 import mySequelize from "./db/sequelize";
-import mysqlService from "./db/mysql-config";
+import mysqlService from "./db/mysql";
 
 const { port } = app;
 const sequelize = mySequelize.getSequelize();

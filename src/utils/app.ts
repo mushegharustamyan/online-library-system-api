@@ -28,8 +28,11 @@ class App {
     return dbConfig[this.environment];
   }
 
-  public listen(port: number, f: () => void) {
-    this.app.listen(port, f);
+  public listen(port: number, callback?: () => void) {
+    this.app.listen(
+      port,
+      callback || (() => console.log(`Server running on port ${port}`))
+    );
   }
 
   public configureApp(): void {
@@ -40,7 +43,7 @@ class App {
     return this.app;
   }
 
-  public getAppDBSetttings() {
+  public getAppDBSettings() {
     return this.dbSettings;
   }
 }

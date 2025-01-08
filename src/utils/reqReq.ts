@@ -56,12 +56,15 @@ export const sendResBody = (
 };
 
 export const getEnvPort = (): number => {
-  console.log(Number(process.env.PORT));
+  const port = parseInt(process.env.PORT || "3000", 10);
+
+  if (!port) throw new Error(`Invalid port number`);
+
   return Number(process.env.PORT);
 };
 
 export const getEnv = (key: string): string => {
-  if (!process.env[key]) return "";
+  if (!process.env[key]) throw new Error(`Missing environment variable ${key}`);
 
   return String(process.env[key]);
 };
