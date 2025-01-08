@@ -1,21 +1,34 @@
-import { createConnection } from "mysql2";
+import mysql from "mysql2/promise";
 import { getEnv } from "../utils/reqReq";
+import { IConnectionSettings } from "../interfaces";
+import app from "../utils/app";
 
-const connectionInit = async () =>
-  new Promise((resolove, reject) => {
-    const connection = createConnection({
-      host: getEnv("DB_HOST"),
-      user: getEnv("DB_USER"),
-      password: getEnv("DB_PWD"),
-      port: 3306,
-      charset: "utf8",
-    });
+class MySQLService {
+  private connectionSettings: IConnectionSettings;
 
-    connection.query("CREATE DATABASE IF NOT EXISTS library", (err, res) => {
-      if (err) reject(err);
+  constructor(connectionSettings: IConnectionSettings) {
+    this.connectionSettings = connectionSettings;
+  }
 
-      resolove(res);
-    });
-  });
+  public async connectionInit() {
+    try {
+      const { db, user, password, host } = this.connectionSettings;
 
-export default connectionInit;
+      const connection = await mysql.createConnection({
+        host,
+        user,
+        password,
+        port: 3306,
+        charset: "utf8",
+      });
+
+      await connection.query(`CREATE DATABASE IF NOT EXISTS ${db}`);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
+
+const mysqlService = new MySQLService(app.getAppDBSetttings());
+
+export default mysqlService;

@@ -61,5 +61,7 @@ export const getEnvPort = (): number => {
 };
 
 export const getEnv = (key: string): string => {
+  if (!process.env[key]) return "";
+
   return String(process.env[key]);
 };
