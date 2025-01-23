@@ -13,7 +13,7 @@ class App {
 
   constructor() {
     this.app = express();
-    this.environment = getEnv("NODE_ENV") || "prod";
+    this.environment = process.env.NODE_ENV || "dev";
     this.port = getEnvPort() || 3000;
     this.dbSettings = this.getDBConfigs();
   }

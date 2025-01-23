@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-dotenv.config();
+dotenv.config({ path: `${process.cwd()}/.env`, debug: true });
 
 import app from "./utils/app";
 import mySequelize from "./db/sequelize";

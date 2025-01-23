@@ -1,7 +1,7 @@
 import { getEnv } from "../utils/reqReq";
 
 export const dbConfig = {
-  prod: {
+  dev: {
     db: getEnv("DB_NAME"),
     user: getEnv("DB_USER"),
     password: getEnv("DB_PWD"),

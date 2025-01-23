@@ -27,7 +27,7 @@ class MySequelize {
   }
 }
 
-const dbSettings = app.getAppDBSetttings();
+const dbSettings = app.getAppDBSettings();
 
 const mySequelize = new MySequelize(dbSettings);
 mySequelize.setConnectionSettings();
