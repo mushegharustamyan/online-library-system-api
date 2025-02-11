@@ -1,10 +1,7 @@
-module.exports = {
+export default {
+  verbose: true,
   preset: "ts-jest",
   testEnvironment: "node",
   testMatch: ["**/*.test.ts"],
-  globals: {
-    "ts-jest": {
-      tsconfig: "tsconfig.test.json",
-    },
-  },
+  setupFiles: ["./jest.setup.ts"],
 };

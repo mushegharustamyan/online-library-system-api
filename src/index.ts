@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+console.log(`${process.cwd()}/.env`);
 dotenv.config({ path: `${process.cwd()}/.env`, debug: true });
 
 import app from "./utils/app";

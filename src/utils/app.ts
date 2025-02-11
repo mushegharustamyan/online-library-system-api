@@ -3,7 +3,7 @@ import { Application } from "express";
 import { PingPongRouter } from "../routes/ping";
 import { getEnv, getEnvPort } from "./reqReq";
 import { IConnectionSettings } from "../interfaces";
-import { dbConfig } from "../db/db.config";
+import { getDBConfig } from "../db/db.config";
 
 class App {
   private app: Application;
@@ -13,7 +13,7 @@ class App {
 
   constructor() {
     this.app = express();
-    this.environment = process.env.NODE_ENV || "dev";
+    this.environment = getEnv("NODE_ENV");
     this.port = getEnvPort() || 3000;
     this.dbSettings = this.getDBConfigs();
   }
@@ -25,7 +25,7 @@ class App {
   }
 
   private getDBConfigs(): IConnectionSettings {
-    return dbConfig[this.environment];
+    return getDBConfig(this.environment);
   }
 
   public listen(port: number, callback?: () => void) {
